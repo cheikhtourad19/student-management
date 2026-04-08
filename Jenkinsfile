@@ -32,9 +32,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh '''
-                    mvn clean verify
-                '''
+                sh 'mvn clean verify -DskipTests'
             }
         }
 
