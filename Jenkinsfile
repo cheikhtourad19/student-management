@@ -4,7 +4,7 @@ pipeline {
     environment {
         GITHUB_REPO_URL    = 'https://github.com/cheikhtourad19/student-management.git'
         GITHUB_BRANCH      = 'main'
-        SONAR_SERVER_NAME  = 'SonarServer'
+        SONAR_SERVER_NAME  = 'sonarQube'
         SONAR_HOST_URL     = 'http://192.168.56.11:9000'
         SONAR_PROJECT_KEY  = 'jenkins-sonar-key'
         SONAR_PROJECT_NAME = 'student-management'
