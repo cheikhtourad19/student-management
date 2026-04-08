@@ -90,11 +90,11 @@ pipeline {
     // ─────────────────────────────────────────────────────────────────────────
     post {
         success {
-            echo "Pipeline completed SUCCESSFULLY — Build #${env.BUILD_NUMBER}"
+            echo "Pipeline completed SUCCESSFULLY "
         }
 
         failure {
-            echo "Pipeline FAILED — Build #${env.BUILD_NUMBER}"
+            echo "Pipeline FAILED
         }
 
         unstable {
