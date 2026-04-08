@@ -9,7 +9,7 @@ pipeline {
         SONAR_PROJECT_KEY  = 'jenkins-sonar-key'
         SONAR_PROJECT_NAME = 'student-management'
         COMPOSE_PROJECT    = 'student-management'
-        COMPOSE_FILE       = 'docker-compose.yml'
+        COMPOSE_FILE       = 'docker-compose.yaml'
     }
 
     stages {
@@ -30,20 +30,15 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-
-                    sh '''
-                        mvn clean verify \
-                            --batch-mode \
-                            --no-transfer-progress \
-                            -DskipTests=true
-                    '''
-
+                sh '''
+                    mvn clean verify
+                '''
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('Static Analysis') {
             steps {
                 withSonarQubeEnv(env.SONAR_SERVER_NAME) {
 
@@ -67,13 +62,13 @@ pipeline {
         }
 
 
-        stage('Docker Compose Build') {
+        stage('Package') {
             steps {
                 sh """
                     docker compose \
                         -p ${env.COMPOSE_PROJECT} \
                         -f ${env.WORKSPACE}/${env.COMPOSE_FILE} \
-                        build --no-cache --parallel
+                        build --pull --no-cache --parallel
                 """
             }
         }
